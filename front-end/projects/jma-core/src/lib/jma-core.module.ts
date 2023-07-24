@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
-import { JmaCoreComponent } from './jma-core.component';
+import { MIS_VALIDADORES } from './directives/mis-validadores.directive';
+import { PIPES_CADENAS } from './pipes/cadenas.pipe';
+import { PIPES_NUMERICOS } from './pipes/numericos.pipe';
+import { SizerComponent } from './components/sizer.component';
+import { UnlessDirective } from './directives/estructurales.directive';
+import { DIRECTIVAS_ATRIBUTO } from './directives/atributos.directive';
 
 
 
 @NgModule({
   declarations: [
-    JmaCoreComponent
-  ],
-  imports: [
   ],
   exports: [
-    JmaCoreComponent
+  ],
+  imports: [
+    MIS_VALIDADORES, PIPES_CADENAS, PIPES_NUMERICOS, SizerComponent, DIRECTIVAS_ATRIBUTO, UnlessDirective,
   ]
 })
 export class JmaCoreModule { }

@@ -91,6 +91,15 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/sakila/**/*.ts",
+              "projects/sakila/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -98,7 +107,7 @@
       "projectType": "library",
       "root": "projects/jma-core",
       "sourceRoot": "projects/jma-core/src",
-      "prefix": "lib",
+      "prefix": "jma",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -122,6 +131,15 @@
             "polyfills": [
               "zone.js",
               "zone.js/testing"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/jma-core/**/*.ts",
+              "projects/jma-core/**/*.html"
             ]
           }
         }
