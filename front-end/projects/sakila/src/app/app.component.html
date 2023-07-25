@@ -327,6 +327,22 @@
 
 <div class="content" role="main">
 
+  <form #miForm="ngForm">
+    <div class="form-floating">
+      <input class="form-control" [class.is-invalid]="origen.invalid" type="text" name="origen" id="origen" [(ngModel)]="elemento.origen" #origen="ngModel" placeholder="origen" required>
+      <label for="origen">origen:</label>
+      <div class="invalid-feedback" [hidden]="origen.valid">{{origen.errors | errormsg}}</div>
+    </div>
+    <div class="form-floating">
+      <input class="form-control" [class.is-invalid]="destino.invalid" type="text" name="destino" id="destino" [(ngModel)]="elemento.destino" #destino="ngModel" placeholder="destino"
+        [equalsTo]="origen">
+      <label for="destino">destino:</label>
+      <div class="invalid-feedback" [hidden]="destino.valid">{{destino.errors | errormsg}}</div>
+    </div>
+    <div>
+      <button class="btn btn-success" [disabled]="miForm.invalid">Enviar</button>
+    </div>
+  </form>
   <!-- Highlight Card -->
   <div class="card highlight-card card-small">
 

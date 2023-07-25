@@ -20,6 +20,7 @@ export function DateValidation(limite: string, compara: Comparator<number>): Val
 
 @Directive({
   selector: '[before][formControlName],[before][formControl],[before][ngModel]',
+  standalone: true,
   providers: [{ provide: NG_VALIDATORS, useExisting: BeforeValidator, multi: true }]
 })
 export class BeforeValidator implements Validator {
@@ -32,6 +33,7 @@ export class BeforeValidator implements Validator {
 }
 @Directive({
   selector: '[beforeOrEquals][formControlName],[beforeOrEquals][formControl],[beforeOrEquals][ngModel]',
+  standalone: true,
   providers: [{ provide: NG_VALIDATORS, useExisting: BeforeOrEqualsValidator, multi: true }]
 })
 export class BeforeOrEqualsValidator implements Validator {
@@ -45,6 +47,7 @@ export class BeforeOrEqualsValidator implements Validator {
 
 @Directive({
   selector: '[after][formControlName],[after][formControl],[after][ngModel]',
+  standalone: true,
   providers: [{ provide: NG_VALIDATORS, useExisting: AfterValidator, multi: true }]
 })
 export class AfterValidator implements Validator {
@@ -58,6 +61,7 @@ export class AfterValidator implements Validator {
 }
 @Directive({
   selector: '[afterOrEquals][formControlName],[afterOrEquals][formControl],[afterOrEquals][ngModel]',
+  standalone: true,
   providers: [{ provide: NG_VALIDATORS, useExisting: AfterOrEqualsValidator, multi: true }]
 })
 export class AfterOrEqualsValidator implements Validator {
@@ -71,6 +75,7 @@ export class AfterOrEqualsValidator implements Validator {
 
 @Directive({
   selector: '[past][formControlName],[past][formControl],[past][ngModel]',
+  standalone: true,
   providers: [{ provide: NG_VALIDATORS, useExisting: PastValidator, multi: true }]
 })
 export class PastValidator implements Validator {
@@ -82,6 +87,7 @@ export class PastValidator implements Validator {
 
 @Directive({
   selector: '[pastOrPresent][formControlName],[pastOrPresent][formControl],[pastOrPresent][ngModel]',
+  standalone: true,
   providers: [{ provide: NG_VALIDATORS, useExisting: PastOrPresentValidator, multi: true }]
 })
 export class PastOrPresentValidator implements Validator {
@@ -93,6 +99,7 @@ export class PastOrPresentValidator implements Validator {
 
 @Directive({
   selector: '[future][formControlName],[future][formControl],[future][ngModel]',
+  standalone: true,
   providers: [{ provide: NG_VALIDATORS, useExisting: FutureValidator, multi: true }]
 })
 export class FutureValidator implements Validator {
@@ -104,6 +111,7 @@ export class FutureValidator implements Validator {
 
 @Directive({
   selector: '[futureOrPresent][formControlName],[futureOrPresent][formControl],[futureOrPresent][ngModel]',
+  standalone: true,
   providers: [{ provide: NG_VALIDATORS, useExisting: FutureOrPresentValidator, multi: true }]
 })
 export class FutureOrPresentValidator implements Validator {

@@ -1,15 +1,17 @@
-import { Component, DebugElement, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ShowErrorsDirective, WindowConfirmDirective } from './atributos.directive';
 
 @Component({
-    template: `<button type="button" (jmaWinConfirm)="MyOutput($event)" [jmaWinConfirmMessage]="MyInput"  ></button>`,
+    template: `<button type="button" (jmaWinConfirm)="MyOutput($event)" [jmaWinConfirmMessage]="MyInput" >Demo</button>`,
     standalone: true,
     imports: [WindowConfirmDirective]
 })
 class WindowConfirmDirectiveHostComponent {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   MyInput: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-explicit-any
   MyOutput: any = () => {};
 }
 
@@ -80,6 +82,7 @@ describe('WindowConfirmDirective', () =>  {
     imports: [ShowErrorsDirective]
 })
 class ShowErrorsDirectiveHostComponent {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   errors: any = null;
 }
 describe('ShowErrors', () =>  {

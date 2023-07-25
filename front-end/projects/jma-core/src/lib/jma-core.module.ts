@@ -12,6 +12,7 @@ import { DIRECTIVAS_ATRIBUTO } from './directives/atributos.directive';
   declarations: [
   ],
   exports: [
+    MIS_VALIDADORES, PIPES_CADENAS, PIPES_NUMERICOS, SizerComponent, DIRECTIVAS_ATRIBUTO, UnlessDirective,
   ],
   imports: [
     MIS_VALIDADORES, PIPES_CADENAS, PIPES_NUMERICOS, SizerComponent, DIRECTIVAS_ATRIBUTO, UnlessDirective,
