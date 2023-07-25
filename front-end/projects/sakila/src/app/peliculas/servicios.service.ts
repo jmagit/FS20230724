@@ -11,7 +11,7 @@ import { AuthService, AUTH_REQUIRED } from '../security';
 @Injectable({
   providedIn: 'root'
 })
-export class PeliculasDAOService extends RESTDAOService<any, any> {
+export class PeliculasDAOService extends RESTDAOService<any, number> {
   constructor() {
     super('catalogo/peliculas/v1', { context: new HttpContext().set(AUTH_REQUIRED, true) });
   }
@@ -24,6 +24,9 @@ export class PeliculasDAOService extends RESTDAOService<any, any> {
       })
     })
   }
+  details(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${id}?mode=details`, this.option);
+  }
 }
 
 @Injectable({
@@ -34,7 +37,7 @@ export class PeliculasViewModelService {
   protected listado: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
-  protected listURL = '/peliculas';
+  protected listURL = '/catalogo';
 
   constructor(protected notify: NotificationService,
     protected out: LoggerService,
@@ -71,7 +74,7 @@ export class PeliculasViewModelService {
     });
   }
   public view(key: any): void {
-    this.dao.get(key).subscribe({
+    this.dao.details(key).subscribe({
       next: data => {
         this.elemento = data;
         this.modo = 'view';
@@ -142,7 +145,7 @@ export class PeliculasViewModelService {
   page = 0;
   totalPages = 0;
   totalRows = 0;
-  rowsPerPage = 8;
+  rowsPerPage = 24;
   load(page: number = -1) {
     if (!page || page < 0) page = this.page
     this.dao.page(page, this.rowsPerPage).subscribe({

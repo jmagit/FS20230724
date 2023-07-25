@@ -1,7 +1,7 @@
 <h1>Libro</h1>
 <form #miForm="ngForm" class="row gy-2 gx-2 align-items-start" [class.was-validated]="miForm.dirty">
   <div class="form-floating">
-    <input class="form-control" type="text" name="id" id="id" [(ngModel)]="VM.Elemento.idLibro" #id="ngModel" required
+    <input class="form-control" type="text" name="id" id="id" [(ngModel)]="VM.Elemento.filmId" #id="ngModel" required
     pattern="^[1-9]\d*$" maxlength="6" placeholder="Referencia">
     <label for="id">Referencia:</label>
     <div class="invalid-feedback" [hidden]="id.valid">{{id.errors | errormsg}}</div>
@@ -43,5 +43,5 @@
     <div class="invalid-feedback" [hidden]="wiki.valid">{{wiki.errors | errormsg}}</div>
   </div>
   <app-form-buttons (send)="VM.send()" [send-disabled]="miForm.invalid" (cancel)="VM.cancel()"
-    (delete)="VM.delete(VM.Elemento.idLibro)" [delete-visible]="VM.Modo === 'edit'" />
+    (delete)="VM.delete(VM.Elemento.filmId)" [delete-visible]="VM.Modo === 'edit'" />
 </form>

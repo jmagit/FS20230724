@@ -1,20 +1,61 @@
-<h1>Libro <a class="btn btn-link" [routerLink]="['/', 'peliculas', VM.Elemento.idLibro,'edit']"><i class="fas fa-pen"></i></a></h1>
-<dl class="row">
-  <dt>Ref.</dt>
-  <dd>{{VM.Elemento.idLibro}}</dd>
-  <dt>Título</dt>
-  <dd>{{VM.Elemento.titulo}}</dd>
-  <dt>Autor</dt>
-  <dd>{{VM.Elemento.autor}}</dd>
-  <dt>País</dt>
-  <dd>{{VM.Elemento.pais}}</dd>
-  <dt>Fecha</dt>
-  <dd>{{VM.Elemento.fecha}}</dd>
-  <dt>Páginas</dt>
-  <dd>{{VM.Elemento.paginas}}</dd>
-  <dt>wiki</dt>
-  <dd><a href="{{VM.Elemento.wiki}}" target="_blank">{{VM.Elemento.wiki}}</a></dd>
-</dl>
+<h1>{{VM.Elemento.title}} <a class="btn btn-link" [routerLink]="['/', 'peliculas', VM.Elemento.filmId,'edit']"><i class="fas fa-pen"></i></a></h1>
+<p class="lead" [textContent]="VM.Elemento.description"></p>
+<h2>Ficha</h2>
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://picsum.photos/id/{{VM.Elemento.filmId}}/150/200" class="card-img-top" [alt]="VM.Elemento.title">
+    </div>
+    <div class="col-md-8">
+      <dl class="card-body row">
+        <dt class="col-sm-2 text-end">Ref.</dt>
+        <dd class="col-sm-10">{{VM.Elemento.filmId}}</dd>
+        <dt class="col-sm-2 text-end">Categorías</dt>
+        <dd class="col-sm-10"><span class="badge rounded-pill text-bg-primary me-1" *ngFor="let categoria of VM.Elemento.categories">{{categoria}}</span></dd>
+        <dt class="col-sm-2 text-end">Año</dt>
+        <dd class="col-sm-10">Estrenada en el {{VM.Elemento.releaseYear}} con una duración de {{VM.Elemento.length}} minutos.</dd>
+        <dt class="col-sm-2 text-end">Idioma</dt>
+        <dd class="col-sm-10">Disponible en {{VM.Elemento.language}}<ng-container *ngIf="VM.Elemento.languageVO"> y en versión original en {{VM.Elemento.languageVO}}</ng-container>.</dd>
+        <dt class="col-sm-2 text-end">Alquiler</dt>
+        <dd class="col-sm-10">Puedes alquilarla {{VM.Elemento.rentalDuration}} días por tan solo {{VM.Elemento.rentalRate | currency:'EUR':'symbol':'1.2-2'}}.</dd>
+        <dt class="col-sm-2 text-end text-danger">Aviso</dt>
+        <dd class="col-sm-10 text-danger">Penalización si no se devuelve o se devuelve en mal estado: {{VM.Elemento.replacementCost | currency:'EUR':'symbol':'1.2-2'}}</dd>
+        <dt class="col-sm-2 text-end">Reparto</dt>
+        <dd class="col-sm-10"><ul class="inline">
+          <li *ngFor="let actor of VM.Elemento.actors">{{actor | titlecase}}</li>
+        </ul></dd>
+      </dl>
+   </div>
+  </div>
+</div>
 <div>
   <app-form-buttons (cancel)="VM.cancel()" />
 </div>
+<!-- {
+  "filmId": 1,
+  "description": "A Epic Drama of a Feminist And a Mad Scientist who must Battle a Teacher in The Canadian Rockies",
+  "length": 86,
+  "rating": "PG",
+  "releaseYear": "2006",
+  "rentalDuration": 6,
+  "rentalRate": 0.99,
+  "replacementCost": 20.99,
+  "title": "ACADEMY DINOSAUR",
+  "language": "English",
+  "languageVO": "Italian",
+  "actors": [
+    "CHRISTIAN GABLE",
+    "JOHNNY CAGE",
+    "LUCILLE TRACY",
+    "MARY KEITEL",
+    "MENA TEMPLE",
+    "OPRAH KILMER",
+    "ROCK DUKAKIS",
+    "SANDRA PECK",
+    "WARREN NOLTE"
+  ],
+  "categories": [
+    "Action",
+    "Comedy"
+  ]
+} -->
