@@ -1,5 +1,14 @@
 <div class="btn-group" role="group">
-  <button class="btn btn-primary" *ngIf="hasSend" (click)="send.emit(null)" [disabled]="sendDisabled"><i class="fas fa-check-circle"></i> {{sendText}}</button>
-  <button class="btn btn-danger" *ngIf="hasDelete" (click)="delete.emit(null)"><i class="far fa-trash-alt"></i> {{deleteText}}</button>
-  <button class="btn btn-success" *ngIf="hasCancel" (click)="cancel.emit(null)"><i class="fas fa-undo-alt"></i> {{cancelText}}</button>
+  <button class="btn btn-primary" *ngIf="hasSend" (click)="send.emit(null)" [disabled]="sendDisabled">
+    <svg class="bi flex-shrink-0 me-2" width="16" height="16" role="img" [attr.aria-label]="sendText">
+      <use xlink:href="assets/crud-sprite.svg#check-circle-fill" />
+    </svg> {{sendText}}</button>
+  <button class="btn btn-danger" *ngIf="hasDelete" (click)="delete.emit(null)">
+    <svg class="bi flex-shrink-0 me-2" width="16" height="16" role="img" [attr.aria-label]="deleteText">
+      <use xlink:href="assets/crud-sprite.svg#trash-fill" />
+    </svg> {{deleteText}}</button>
+  <button class="btn btn-success" *ngIf="hasCancel" (click)="cancel.emit(null)">
+    <svg class="bi flex-shrink-0 me-2" width="16" height="16" role="img" [attr.aria-label]="cancelText">
+      <use xlink:href="assets/crud-sprite.svg#undo" />
+    </svg> {{cancelText}}</button>
 </div>
