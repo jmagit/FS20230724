@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationService } from './common-services';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'sakila';
-  elemento = { origen: '', destino: ''}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  constructor(nav: NavigationService) {}
 }
