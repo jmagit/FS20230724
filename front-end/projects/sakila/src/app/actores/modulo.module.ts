@@ -4,25 +4,25 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { JmaCoreModule } from 'jma-core';
 import { CommonServicesModule } from '../common-services';
-import { PeliculasComponent, PELICULAS_COMPONENTES, PeliculasAddComponent, PeliculasEditComponent, PeliculasViewComponent, PeliculasListComponent, PeliculasListBodyComponent } from './componente.component';
+import { ACTORES_COMPONENTES, ActoresAddComponent, ActoresEditComponent, ActoresListComponent, ActoresViewComponent } from './componente.component';
 import {PaginatorModule} from 'primeng/paginator';
 import { CommonComponentModule } from '../common-component';
+import { PeliculasListBodyComponent } from '../peliculas';
 
 export const routes: Routes = [
-    { path: '', component: PeliculasListComponent },
-    { path: 'add', component: PeliculasAddComponent },
-    { path: ':id/edit', component: PeliculasEditComponent },
-    { path: ':id', component: PeliculasViewComponent },
-    { path: ':id/:kk', component: PeliculasViewComponent },
-  ];
+  { path: '', component: ActoresListComponent },
+  { path: 'add', component: ActoresAddComponent },
+  { path: ':id/edit', component: ActoresEditComponent },
+  { path: ':id', component: ActoresViewComponent },
+  { path: ':id/:kk', component: ActoresViewComponent },
+];
 
 @NgModule({
   declarations: [
-    PELICULAS_COMPONENTES,
+    ACTORES_COMPONENTES,
   ],
   exports: [
-    PELICULAS_COMPONENTES,
-    RouterModule, PeliculasListBodyComponent,
+    RouterModule
   ],
   imports: [
     CommonModule, FormsModule, RouterModule.forChild(routes),
@@ -30,4 +30,4 @@ export const routes: Routes = [
     PaginatorModule, CommonComponentModule, JmaCoreModule, PeliculasListBodyComponent,
   ]
 })
-export class PeliculasModule { }
+export default class ActoresModule { }

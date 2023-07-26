@@ -44,6 +44,9 @@ export class ActoresDAOService extends RESTDAOService<any, number> {
       })
     })
   }
+  peliculas(id: number): Observable<Array<any>> {
+    return this.http.get<any>(`${this.baseUrl}/${id}/pelis`, this.option);
+  }
 }
 
 @Injectable({

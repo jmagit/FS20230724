@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap, RouterModule, RouterLink } from '@angular/router';
 import { PeliculasViewModelService } from './servicios.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-peliculas',
@@ -61,7 +62,9 @@ export class PeliculasListComponent implements OnChanges, OnDestroy {
 @Component({
   selector: 'app-peliculas-list-body',
   templateUrl: './tmpl-list-body.component.html',
-  styleUrls: ['./componente.component.css']
+  styleUrls: ['./componente.component.css'],
+  standalone: true,
+  imports: [CommonModule, RouterLink]
 })
 export class PeliculasListBodyComponent {
   @Input({required: true}) Listado: Array<any> = []
@@ -122,5 +125,5 @@ export class PeliculasViewComponent implements OnChanges {
 
 export const PELICULAS_COMPONENTES = [
   PeliculasComponent, PeliculasListComponent, PeliculasAddComponent,
-  PeliculasEditComponent, PeliculasViewComponent, PeliculasListBodyComponent,
+  PeliculasEditComponent, PeliculasViewComponent,
 ];

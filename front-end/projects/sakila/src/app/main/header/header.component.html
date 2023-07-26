@@ -28,18 +28,18 @@
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/catalogo" [queryParams]="{ search: 'categorias'}"
                 routerLinkActive="active"><i class="fa-solid fa-list"></i> categorías</a>
             </li>
+            <li class="nav-item" *ngIf="auth.isInRoles('Empleados')">
+              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/actores"
+                routerLinkActive="active"><i class="fa-person-rays"></i> actores</a>
+            </li>
             <li class="nav-item">
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/contactos"
                 routerLinkActive="active"><i class="fa-solid fa-address-book"></i> contactos</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/alysia/baxendale"
                 routerLinkActive="active"><i class="fa-solid fa-address-book"></i> alysia</a>
-            </li>
-            <li class="nav-item" *ngIf="auth.isInRoles('Empleados')">
-              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/libros"
-                routerLinkActive="active"><i class="fa-solid fa-book"></i> libros</a>
-            </li>
+            </li> -->
           </ul>
           <app-login />
         </div>
