@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { JmaCoreModule } from 'jma-core';
+import { ErrorMessagePipe, TypeValidator } from 'jma-core';
 import { CommonServicesModule } from '../common-services';
 import { CONTACTOS_COMPONENTES, ContactosComponent, ContactosAddComponent, ContactosEditComponent, ContactosListComponent, ContactosViewComponent } from './componente.component';
-import {PaginatorModule} from 'primeng/paginator';
+import { PaginatorModule } from 'primeng/paginator';
 import { CommonComponentModule } from '../common-component';
 
 export const routes: Routes = [
@@ -26,8 +26,8 @@ export const routes: Routes = [
   ],
   imports: [
     CommonModule, FormsModule, RouterModule.forChild(routes),
-    JmaCoreModule, CommonServicesModule,
-    PaginatorModule, CommonComponentModule, JmaCoreModule,
+    PaginatorModule, CommonServicesModule, CommonComponentModule,
+    ErrorMessagePipe, TypeValidator,
   ]
 })
 export class ContactosModule { }

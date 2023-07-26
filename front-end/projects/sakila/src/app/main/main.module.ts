@@ -1,5 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 import { CommonServicesModule } from '../common-services';
@@ -7,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { AjaxWaitComponent } from './ajax-wait';
 import { HeaderComponent } from './header/header.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RouterModule } from '@angular/router';
 import { SecurityModule } from '../security';
 
 
