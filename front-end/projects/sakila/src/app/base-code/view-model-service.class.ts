@@ -13,7 +13,7 @@ export abstract class ViewModelService<T, K> {
   protected readonly initElemento: T;
   protected idOriginal: K | null = null;
 
-  constructor(protected dao: RESTDAOService<T, K>, initElemento: T, protected notify: NotificationService, protected out: LoggerService,
+  constructor(protected dao: RESTDAOService<T, K>, initElemento: T, public notify: NotificationService, protected out: LoggerService,
     public auth: AuthService, protected router: Router, protected navigation: NavigationService) {
     this.initElemento = initElemento
   }

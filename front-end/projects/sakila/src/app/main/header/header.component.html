@@ -32,6 +32,10 @@
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/actores"
                 routerLinkActive="active"><i class="fa-person-rays"></i> actores</a>
             </li>
+            <li class="nav-item" *ngIf="auth.isInRoles('Empleados')">
+              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/idiomas"
+                routerLinkActive="active"><i class="fa-solid fa-language"></i> idiomas</a>
+            </li>
             <li class="nav-item">
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/contactos"
                 routerLinkActive="active"><i class="fa-solid fa-address-book"></i> contactos</a>
