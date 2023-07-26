@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'projects/sakila/src/app/security';
+import { environment } from 'projects/sakila/src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +8,6 @@ import { AuthService } from 'projects/sakila/src/app/security';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  readonly roleMantenimiento = environment.roleMantenimiento
   constructor(public auth: AuthService) {}
 }

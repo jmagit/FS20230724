@@ -20,9 +20,9 @@ export class PeliculasDAOService extends RESTDAOService<any, number> {
       })
     })
   }
-  details(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}?mode=details`, this.option);
-  }
+  // details(id: number): Observable<any> {
+  //   return this.http.get<any>(`${this.baseUrl}/${id}?mode=details`, this.option);
+  // }
   clasificaciones(): Observable<Array<any>> {
     return this.http.get<any>(`${this.baseUrl}/clasificaciones`, this.option);
   }

@@ -1,4 +1,4 @@
-import { HttpContext, HttpErrorResponse } from '@angular/common/http';
+import { HttpContext, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoggerService } from 'jma-core';
@@ -7,11 +7,13 @@ import { RESTDAOService, ModoCRUD } from '../base-code';
 import { NavigationService, NotificationService } from '../common-services';
 import { AuthService, AUTH_REQUIRED } from '../security';
 import { ActoresDAOService, CategoriasDAOService, IdiomasDAOService, PeliculasDAOService } from '../common-services/daos.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeliculasViewModelService {
+  readonly roleMantenimiento = environment.roleMantenimiento
   protected modo: ModoCRUD = 'list';
   protected listado: Array<any> = [];
   protected elemento: any = {};
@@ -54,7 +56,7 @@ export class PeliculasViewModelService {
     });
   }
   public view(key: any): void {
-    this.dao.details(key).subscribe({
+    this.dao.get(key, {params: new HttpParams().set('mode', 'details')}).subscribe({
       next: data => {
         this.elemento = data;
         this.modo = 'view';

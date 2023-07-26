@@ -15,6 +15,6 @@ const routes: Routes = [
     CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(routes),
   ],
   declarations: [ LoginComponent, RegisterUserComponent, LoginFormComponent ],
-  exports: [ LoginComponent, RegisterUserComponent ],
+  exports: [ LoginComponent, RegisterUserComponent, RouterModule ],
 })
 export class SecurityModule { }

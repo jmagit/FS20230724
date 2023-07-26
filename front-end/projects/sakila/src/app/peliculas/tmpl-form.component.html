@@ -1,11 +1,5 @@
-<h1>Película</h1>
+<h1 class="display-3">Película</h1>
 <form #miForm="ngForm" class="row gy-2 gx-2 align-items-start">
-  <!-- <div class="form-floating">
-    <input class="form-control" type="text" name="id" id="id" [(ngModel)]="VM.Elemento.filmId" #id="ngModel" required
-    pattern="^[1-9]\d*$" maxlength="6" placeholder="Referencia">
-    <label for="id">Referencia:</label>
-    <output class="invalid-feedback" [hidden]="id.valid">{{id.errors | errormsg}}</output>
-  </div> -->
   <div class="form-floating">
     <input class="form-control" [class.is-invalid]="title.invalid" type="text" name="title" id="title"
       [(ngModel)]="VM.Elemento.title" #title="ngModel" placeholder="title" notblank maxlength="128">
@@ -78,7 +72,7 @@
     <label for="replacementCost">penalización:</label>
     <output class="invalid-feedback" [hidden]="replacementCost.valid">{{replacementCost.errors | errormsg}}</output>
   </div>
-  <div class="row">
+  <div class="row mt-2 g-1">
     <div class="col-md-6">
       <div class="input-group">
         <label class="input-group-text" for="actorId">Reparto</label>
@@ -93,7 +87,7 @@
       <div class="list-group">
         <li class="list-group-item" *ngFor="let actor of VM.Elemento.actors; let indice=index;">
           {{VM.dameActor(actor) | titlecase}} <button type="button"
-            class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="VM.removeActor(indice)"><svg
+            class="btn btn-outline-danger position-absolute h-100 top-0 end-0" (click)="VM.removeActor(indice)"><svg
               class="bi" width="16" height="16" role="img" aria-label="borrar">
               <use xlink:href="assets/crud-sprite.svg#trash-fill" />
             </svg></button></li>
@@ -113,7 +107,7 @@
       <div class="list-group">
         <li class="list-group-item" *ngFor="let categoria of VM.Elemento.categories; let indice=index;">
           {{VM.dameCategoria(categoria)}} <button type="button"
-            class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="VM.removeCategoria(indice)"><svg
+          class="btn btn-outline-danger position-absolute h-100 top-0 end-0" (click)="VM.removeCategoria(indice)"><svg
               class="bi" width="16" height="16" role="img" aria-label="borrar">
               <use xlink:href="assets/crud-sprite.svg#trash-fill" />
             </svg></button></li>
