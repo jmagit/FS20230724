@@ -39,8 +39,8 @@
                 <div class="m-0">
           <label for="idioma" class="form-label" hidden>idioma:</label>
           <input class="form-control" [class.is-invalid]="idioma.invalid" type="text" name="idioma" id="idioma" [(ngModel)]="VM.Elemento.idioma"
-            #idioma="ngModel" required maxlength="20">
-          <output class="invalid-feedback" [hidden]="idioma.valid">{{idioma.errors | errormsg}}</output>
+            #idioma="ngModel" notblank maxlength="20">
+          <output class="invalid-feedback" [hidden]="idioma.valid || miForm.pristine">{{idioma.errors | errormsg}}</output>
         </div>
       </div>
       <div class="modal-footer">

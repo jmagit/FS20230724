@@ -8,7 +8,7 @@
   </div> -->
   <div class="form-floating">
     <input class="form-control" [class.is-invalid]="title.invalid" type="text" name="title" id="title"
-      [(ngModel)]="VM.Elemento.title" #title="ngModel" placeholder="title" required maxlength="128">
+      [(ngModel)]="VM.Elemento.title" #title="ngModel" placeholder="title" notblank maxlength="128">
     <label for="title">título:</label>
     <output class="invalid-feedback" [hidden]="title.valid">{{title.errors | errormsg}}</output>
   </div>

@@ -45,6 +45,23 @@ export class UppercaseValidator implements Validator {
   }
 }
 
+export function notblankValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    return !control.value || control.value.toString().trim() === '' ? { notblank: 'Requerido, no debe estar en blanco' } : null
+  };
+}
+
+@Directive({
+  selector: '[notblank][formControlName],[notblank][formControl],[notblank][ngModel]',
+  providers: [{ provide: NG_VALIDATORS, useExisting: NotblankValidator, multi: true }],
+  standalone: true
+})
+export class NotblankValidator implements Validator {
+  validate(control: AbstractControl): ValidationErrors | null {
+    return notblankValidator()(control);
+  }
+}
+
 @Directive({
   selector: '[type][formControlName],[type][formControl],[type][ngModel]',
   providers: [
@@ -118,4 +135,4 @@ export class EqualsToValidator implements Validator, OnChanges {
   }
 }
 
-export const MIS_VALIDADORES = [NIFValidator, TypeValidator, UppercaseValidator, EqualsValidator, EqualsToValidator]
+export const MIS_VALIDADORES = [NIFValidator, TypeValidator, UppercaseValidator, NotblankValidator, EqualsValidator, EqualsToValidator]

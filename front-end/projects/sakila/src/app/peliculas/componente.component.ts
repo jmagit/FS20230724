@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, 
 import { ActivatedRoute, Router, ParamMap, RouterModule, RouterLink } from '@angular/router';
 import { PeliculasViewModelService } from './servicios.service';
 import { CommonModule } from '@angular/common';
+import { NormalizePipe } from 'jma-core';
 
 @Component({
   selector: 'app-peliculas',
@@ -64,7 +65,7 @@ export class PeliculasListComponent implements OnChanges, OnDestroy {
   templateUrl: './tmpl-list-body.component.html',
   styleUrls: ['./componente.component.css'],
   standalone: true,
-  imports: [CommonModule, RouterLink]
+  imports: [CommonModule, RouterLink, NormalizePipe]
 })
 export class PeliculasListBodyComponent {
   @Input({required: true}) Listado: Array<any> = []

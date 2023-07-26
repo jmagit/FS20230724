@@ -2,13 +2,13 @@
 <form #miForm="ngForm" class="row gy-2 gx-2 align-items-start">
   <div class="form-floating">
     <input class="form-control" [class.is-invalid]="nombre.invalid" type="text" name="nombre" id="nombre" [(ngModel)]="VM.Elemento.nombre"
-      #nombre="ngModel" placeholder="nombre" required minlength="2" maxlength="45" uppercase >
+      #nombre="ngModel" placeholder="nombre" notblank minlength="2" maxlength="45" uppercase >
     <label for="nombre">nombre:</label>
     <output class="invalid-feedback" [hidden]="nombre.valid">{{nombre.errors | errormsg}}</output>
   </div>
   <div class="form-floating">
     <input class="form-control" [class.is-invalid]="apellidos.invalid" type="text" name="apellidos" id="apellidos" [(ngModel)]="VM.Elemento.apellidos"
-      #apellidos="ngModel" placeholder="apellidos" required minlength="2" maxlength="45" uppercase>
+      #apellidos="ngModel" placeholder="apellidos" notblank minlength="2" maxlength="45" uppercase>
     <label for="apellidos">apellidos:</label>
     <output class="invalid-feedback" [hidden]="apellidos.valid">{{apellidos.errors | errormsg}}</output>
   </div>

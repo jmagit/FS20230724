@@ -39,8 +39,8 @@
                 <div class="m-0">
           <label for="categoria" class="form-label" hidden>categoría:</label>
           <input class="form-control" [class.is-invalid]="categoria.invalid" type="text" name="categoria" id="categoria" [(ngModel)]="VM.Elemento.categoria"
-            #categoria="ngModel" required maxlength="25">
-          <output class="invalid-feedback" [hidden]="categoria.valid">{{categoria.errors | errormsg}}</output>
+            #categoria="ngModel" notblank maxlength="25">
+          <output class="invalid-feedback" [hidden]="categoria.valid || miForm.pristine">{{categoria.errors | errormsg}}</output>
         </div>
       </div>
       <div class="modal-footer">

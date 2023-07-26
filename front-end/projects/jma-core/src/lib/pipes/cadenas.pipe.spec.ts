@@ -1,4 +1,4 @@
-import { CapitalizePipe, ElipsisPipe, ErrorMessagePipe, StripTagsPipe } from './cadenas.pipe';
+import { CapitalizePipe, ElipsisPipe, ErrorMessagePipe, NormalizePipe, StripTagsPipe } from './cadenas.pipe';
 
 describe('ElipsisPipe', () => {
   let pipe = new ElipsisPipe();
@@ -68,6 +68,24 @@ describe('StripTagsPipe', () => {
       expect(pipe.transform(caso.input, 'i', 'b')).toBe(caso.output));
   });
 
+});
+
+describe('NormalizePipe', () => {
+  let pipe = new NormalizePipe();
+  beforeAll(() => {
+    pipe = new NormalizePipe();
+  })
+  it('create an instance', () => {
+    expect(pipe).toBeTruthy();
+  });
+  [
+    { input: 'La uña se me rompió después \n\tde beber cachaça', output: 'La-una-se-me-rompio-despues-de-beber-cachaca' },
+    { input: 'àáâãäåÀÁÂÃÄÅ', output: 'aaaaaaAAAAAA' },
+    { input: 'ñÑ', output: 'nN' },
+  ].forEach(caso => {
+    it(`OK: '${caso.input}' -> '${caso.output}'`, () =>
+      expect(pipe.transform(caso.input)).toBe(caso.output));
+  });
 });
 
 describe('ErrorMessagePipe', () => {
