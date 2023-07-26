@@ -1,0 +1,11 @@
+<section class="container">
+  <section class="row">
+    <article class="card col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 px-0" *ngFor="let item of Listado" [routerLink]="[item.filmId, item.title]" >
+      <img src="https://picsum.photos/id/{{item.filmId}}/150/200" class="card-img-top" [alt]="item.title" (error)="imageErrorHandler($event)">
+      <div class="card-footer">
+        <a [routerLink]="[item.filmId, item.title]">
+          {{item.title}}</a>
+      </div>
+    </article>
+  </section>
+</section>

@@ -22,11 +22,11 @@
             </li>
             <li class="nav-item">
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/catalogo"
-                routerLinkActive="active"><i class="fa-solid fa-chalkboard-user"></i> catalogo</a>
+                routerLinkActive="active"><i class="fa-solid fa-film"></i> catalogo</a>
             </li>
             <li class="nav-item">
-              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/chisme/de/hacer/numeros"
-                routerLinkActive="active"><i class="fa-solid fa-calculator"></i> calculadora</a>
+              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/catalogo" [queryParams]="{ search: 'categorias'}"
+                routerLinkActive="active"><i class="fa-solid fa-list"></i> categorías</a>
             </li>
             <li class="nav-item">
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/contactos"
@@ -39,24 +39,6 @@
             <li class="nav-item" *ngIf="auth.isInRoles('Empleados')">
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/libros"
                 routerLinkActive="active"><i class="fa-solid fa-book"></i> libros</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/kk.svg"
-                routerLinkActive="active"><i class="fa-solid fa-image"></i> svg</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/config"
-                routerLinkActive="active"><i class="fa-solid fa-screwdriver-wrench"></i> config</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/config/datos"
-                routerLinkActive="active"><i class="fa-solid fa-screwdriver-wrench"></i> datos</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/false" routerLinkActive="active" ><i class="fa-solid fa-house"></i> false</a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" href="/demos" ><i class="fa-solid fa-house"></i> lenta</a>
             </li>
           </ul>
           <app-login />

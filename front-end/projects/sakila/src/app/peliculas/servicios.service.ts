@@ -6,28 +6,7 @@ import { Observable } from 'rxjs';
 import { RESTDAOService, ModoCRUD } from '../base-code';
 import { NavigationService, NotificationService } from '../common-services';
 import { AuthService, AUTH_REQUIRED } from '../security';
-
-
-@Injectable({
-  providedIn: 'root'
-})
-export class PeliculasDAOService extends RESTDAOService<any, number> {
-  constructor() {
-    super('catalogo/peliculas/v1', { context: new HttpContext().set(AUTH_REQUIRED, true) });
-  }
-  page(page: number, rows: number = 20): Observable<{ page: number, pages: number, rows: number, list: Array<any> }> {
-    return new Observable(subscriber => {
-      const url = `${this.baseUrl}?page=${page}&size=${rows}&sort=title`
-      this.http.get<any>(url, this.option).subscribe({
-        next: data => subscriber.next({ page: data.number, pages: data.totalPages, rows: data.totalElements, list: data.content }),
-        error: err => subscriber.error(err)
-      })
-    })
-  }
-  details(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}?mode=details`, this.option);
-  }
-}
+import { ActoresDAOService, CategoriasDAOService, IdiomasDAOService, PeliculasDAOService } from '../common-services/daos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +20,7 @@ export class PeliculasViewModelService {
 
   constructor(protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: PeliculasDAOService
+    protected dao: PeliculasDAOService, protected daoIdiomas: IdiomasDAOService, protected daoCategorias: CategoriasDAOService, protected daoActores: ActoresDAOService
     , public auth: AuthService, protected router: Router, private navigation: NavigationService
   ) { }
 
@@ -58,12 +37,13 @@ export class PeliculasViewModelService {
       error: err => this.handleError(err)
     });
   }
-
   public add(): void {
+    this.cargaListas()
     this.elemento = {};
     this.modo = 'add';
   }
   public edit(key: any): void {
+    this.cargaListas()
     this.dao.get(key).subscribe({
       next: data => {
         this.elemento = data;
@@ -88,7 +68,7 @@ export class PeliculasViewModelService {
     this.dao.remove(key).subscribe({
       next: data => {
         // this.list()
-        this.load()
+        this.cancel()
       },
       error: err => this.handleError(err)
     });
@@ -160,11 +140,96 @@ export class PeliculasViewModelService {
     })
   }
   pageChange(page: number = 0) {
-    // this.router.navigate([], { queryParams: { page }})
-    this.router.navigateByUrl(`${this.listURL}?page=${page}`)
+    this.router.navigate([], { queryParams: { page } })
   }
-  imageErrorHandler(event: Event, item: any) {
-    (event.target as HTMLImageElement).src = item.sexo === 'H' ? '/assets/user-not-found-male.png' : '/assets/user-not-found-female.png'
- }
+  imageErrorHandler(event: Event) {
+    (event.target as HTMLImageElement).src = '/assets/photo-not-found.svg'
+  }
 
+  public idiomas: Array<any> = [];
+  public clasificaciones: Array<any> = [];
+  private actores: Array<any> = [];
+  private categorias: Array<any> = [];
+
+  public get Actores(): any { return this.actores.filter(item => !this.elemento?.actors?.includes(item.actorId)); }
+  public get Categorias(): any { return this.categorias.filter(item => !this.elemento?.categories?.includes(item.id)); }
+
+  public cargaCategorias() {
+    this.daoCategorias.query().subscribe({
+      next: data => {
+        this.categorias = data;
+      },
+      error: err => this.handleError(err)
+    });
+  }
+
+  private cargaListas() {
+    if (this.clasificaciones.length === 0)
+      this.dao.clasificaciones().subscribe({
+        next: data => {
+          this.clasificaciones = data;
+        },
+        error: err => this.handleError(err)
+      });
+    this.cargaCategorias();
+    this.daoActores.query().subscribe({
+      next: data => {
+        this.actores = data;
+      },
+      error: err => this.handleError(err)
+    });
+    this.daoIdiomas.query().subscribe({
+      next: data => {
+        this.idiomas = data;
+      },
+      error: err => this.handleError(err)
+    });
+  }
+
+
+  dameActor(id: number) {
+    if (!this?.actores || this.actores.length === 0) return '(sin cargar)'
+    const cat = this.actores.find(item => item.actorId === id)
+    return cat ? cat.nombre : 'error'
+  }
+  addActor(id: number) {
+    if(!this.elemento.actors) {
+      this.elemento.actors = []
+    } else if (this.elemento.actors.includes(id)) {
+      this.notify.add('Ya tiene la categoría')
+      return
+    }
+    this.elemento.actors.push(id)
+  }
+  removeActor(index: number) {
+    this.elemento.actors.splice(index, 1)
+  }
+
+  dameCategoria(id: number) {
+    if (!this?.categorias || this.categorias.length === 0) return '(sin cargar)'
+    const cat = this.categorias.find(item => item.id === id)
+    return cat ? cat.categoria : 'error'
+  }
+  addCategoria(id: number) {
+    if(!this.elemento.categories) {
+      this.elemento.categories = []
+    } else if (this.elemento.categories.includes(id)) {
+      this.notify.add('Ya tiene la categoría')
+      return
+    }
+    this.elemento.categories.push(id)
+  }
+  removeCategoria(index: number) {
+    this.elemento.categories.splice(index, 1)
+  }
+
+  public porCategorias(id: number) {
+    this.cargaCategorias();
+    this.daoCategorias.peliculas(id).subscribe({
+      next: data => {
+        this.listado = data;
+      },
+      error: err => this.handleError(err)
+    });
+  }
 }

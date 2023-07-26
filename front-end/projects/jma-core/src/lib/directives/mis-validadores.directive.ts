@@ -59,7 +59,7 @@ export class TypeValidator implements Validator {
     if (valor) {
       const dom = this.elem.nativeElement;
       if (dom.validity) { // dom.checkValidity();
-        return dom.validity.typeMismatch ? { 'type': dom.validationMessage } : null;
+        return (dom.validity.typeMismatch || dom.validity.stepMismatch) ? { 'type': dom.validationMessage } : null;
       }
     }
     return null;

@@ -1,5 +1,5 @@
 <h1>{{VM.Elemento.title}}<span class="badge rounded-pill bg-danger position-relative top-0 translate-middle-y fs-6">{{VM.Elemento.rating}}</span>
-  <a class="btn btn-link" [routerLink]="['/', 'catalogo', VM.Elemento.filmId,'edit']"><svg class="bi flex-shrink-0 me-2 text-primary" width="24" height="24" role="img" aria-label="editar">
+  <a *ngIf="VM.auth.isInRoles('Empleados')" class="btn btn-link" [routerLink]="['/', 'catalogo', VM.Elemento.filmId,'edit']"><svg class="bi flex-shrink-0 me-2 text-primary" width="24" height="24" role="img" aria-label="editar">
     <use xlink:href="assets/crud-sprite.svg#pen-fill" />
   </svg>
 </a>
@@ -9,7 +9,7 @@
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-4 col-lg-3">
-      <img src="https://picsum.photos/id/{{VM.Elemento.filmId}}/150/200" class="card-img rounded-start rounded-end-0" [alt]="VM.Elemento.title">
+      <img src="https://picsum.photos/id/{{VM.Elemento.filmId}}/150/200" class="card-img rounded-start rounded-end-0" [alt]="VM.Elemento.title" (error)="VM.imageErrorHandler($event)">
     </div>
     <div class="col-md-8 col-lg-9">
       <dl class="card-body row">
@@ -26,7 +26,7 @@
           <li *ngFor="let actor of VM.Elemento.actors">{{actor | titlecase}}</li>
         </ul></dd>
         <dt class="col-sm-2 text-sm-end">Alquiler</dt>
-        <dd class="col-sm-10">Puedes alquilarla {{VM.Elemento.rentalDuration}} días por tan solo {{VM.Elemento.rentalRate | currency:'EUR':'symbol':'1.2-2'}}.</dd>
+        <dd class="col-sm-10">Puedes alquilarla {{VM.Elemento.rentalDuration}} {{VM.Elemento.rentalDuration | i18nPlural:({'=1': 'día', 'other': 'días'})}} por tan solo {{VM.Elemento.rentalRate | currency:'EUR':'symbol':'1.2-2'}}.</dd>
         <dt class="col-sm-2 text-sm-end text-danger">Aviso</dt>
         <dd class="col-sm-10 text-danger">Penalización si no se devuelve o se devuelve en mal estado: {{VM.Elemento.replacementCost | currency:'EUR':'symbol':'1.2-2'}}</dd>
       </dl>

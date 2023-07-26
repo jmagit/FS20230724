@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { PeliculasViewModelService } from './servicios.service';
 
@@ -36,16 +36,39 @@ export class PeliculasComponent implements OnInit, OnDestroy {
 })
 export class PeliculasListComponent implements OnChanges, OnDestroy {
   @Input() page = 0
-
+  @Input() search = ''
+  @Input() categoria? : number
+  pagina = false
   constructor(protected vm: PeliculasViewModelService) { }
 
   public get VM(): PeliculasViewModelService { return this.vm; }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.vm.load(this.page)
+    // if (this.type == 'categorias') {
+    //   this.vm.list()
+    if (this.categoria) {
+      this.vm.porCategorias(this.categoria)
+    } else if (this.search == 'categorias') {
+      this.vm.cargaCategorias()
+    } else{
+      this.pagina = true;
+      this.vm.load(this.page)
+    }
   }
 
   ngOnDestroy(): void { this.vm.clear(); }
+}
+@Component({
+  selector: 'app-peliculas-list-body',
+  templateUrl: './tmpl-list-body.component.html',
+  styleUrls: ['./componente.component.css']
+})
+export class PeliculasListBodyComponent {
+  @Input({required: true}) Listado: Array<any> = []
+  @Output() imageError = new EventEmitter<any>()
+  imageErrorHandler(event: Event) {
+    this.imageError.emit(event)
+  }
 }
 
 @Component({
@@ -99,5 +122,5 @@ export class PeliculasViewComponent implements OnChanges {
 
 export const PELICULAS_COMPONENTES = [
   PeliculasComponent, PeliculasListComponent, PeliculasAddComponent,
-  PeliculasEditComponent, PeliculasViewComponent,
+  PeliculasEditComponent, PeliculasViewComponent, PeliculasListBodyComponent,
 ];

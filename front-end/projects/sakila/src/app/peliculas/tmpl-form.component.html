@@ -1,46 +1,124 @@
-<h1>Libro</h1>
-<form #miForm="ngForm" class="row gy-2 gx-2 align-items-start" [class.was-validated]="miForm.dirty">
-  <div class="form-floating">
+<h1>Película</h1>
+<form #miForm="ngForm" class="row gy-2 gx-2 align-items-start">
+  <!-- <div class="form-floating">
     <input class="form-control" type="text" name="id" id="id" [(ngModel)]="VM.Elemento.filmId" #id="ngModel" required
     pattern="^[1-9]\d*$" maxlength="6" placeholder="Referencia">
     <label for="id">Referencia:</label>
-    <div class="invalid-feedback" [hidden]="id.valid">{{id.errors | errormsg}}</div>
+    <output class="invalid-feedback" [hidden]="id.valid">{{id.errors | errormsg}}</output>
+  </div> -->
+  <div class="form-floating">
+    <input class="form-control" [class.is-invalid]="title.invalid" type="text" name="title" id="title"
+      [(ngModel)]="VM.Elemento.title" #title="ngModel" placeholder="title" required maxlength="128">
+    <label for="title">título:</label>
+    <output class="invalid-feedback" [hidden]="title.valid">{{title.errors | errormsg}}</output>
   </div>
   <div class="form-floating">
-    <input class="form-control" type="text" name="titulo" id="titulo" [(ngModel)]="VM.Elemento.titulo" #titulo="ngModel"
-      required maxlength="50" placeholder="titulo">
-    <label for="titulo">Título:</label>
-    <div class="invalid-feedback" [hidden]="titulo.valid">{{titulo.errors | errormsg}}</div>
+    <textarea class="form-control" [class.is-invalid]="description.invalid" type="text" name="description"
+      id="description" [(ngModel)]="VM.Elemento.description" #description="ngModel" placeholder="description"
+      style="height: 100px"></textarea>
+    <label for="description">descripción:</label>
+    <output class="invalid-feedback" [hidden]="description.valid">{{description.errors | errormsg}}</output>
   </div>
-  <div class="form-floating">
-    <input class="form-control" type="text" name="autor" id="autor" [(ngModel)]="VM.Elemento.autor" #autor="ngModel"
-      maxlength="50" placeholder="autor">
-    <label for="autor">Autor:</label>
-    <div class="invalid-feedback" [hidden]="autor.valid">{{autor.errors | errormsg}}</div>
+  <div class="form-floating col-md-6">
+    <select class="form-control form-select" [class.is-invalid]="rating.invalid" name="rating" id="rating"
+      [(ngModel)]="VM.Elemento.rating" #rating="ngModel">
+      <option [value]="null"></option>
+      <option *ngFor="let ele of VM.clasificaciones" [value]="ele.key">{{ele.value}} ({{ele.key}})</option>
+    </select>
+    <label for="rating">clasificación por edades:</label>
+    <output class="invalid-feedback" [hidden]="rating.valid">{{rating.errors | errormsg}}</output>
   </div>
-  <div class="form-floating">
-    <input class="form-control" type="text" name="pais" id="pais" [(ngModel)]="VM.Elemento.pais" #pais="ngModel"
-      maxlength="50" placeholder="pais">
-    <label for="pais">País:</label>
-    <div class="invalid-feedback" [hidden]="pais.valid">{{pais.errors | errormsg}}</div>
+  <div class="form-floating col-md-3">
+    <select class="form-control form-select" [class.is-invalid]="languageId.invalid" name="languageId" id="languageId"
+      [(ngModel)]="VM.Elemento.languageId" #languageId="ngModel" required>
+      <option *ngFor="let lang of VM.idiomas" [value]="lang.id">{{lang.idioma}}</option>
+    </select>
+    <label for="languageId">idioma:</label>
+    <output class="invalid-feedback" [hidden]="languageId.valid">{{languageId.errors | errormsg}}</output>
   </div>
-  <div class="form-floating">
-    <input class="form-control" type="text" name="fecha" id="fecha" [(ngModel)]="VM.Elemento.fecha" #fecha="ngModel"
-      pattern="^[12]\d{3}$" placeholder="fecha">
-    <label for="fecha">Fecha:</label>
-    <div class="invalid-feedback" [hidden]="fecha.valid">{{fecha.errors | errormsg}}</div>
+  <div class="form-floating col-md-3">
+    <select class="form-control form-select" name="languageVOId" id="languageVOId"
+      [(ngModel)]="VM.Elemento.languageVOId" #languageVOId="ngModel">
+      <option [value]="null"></option>
+      <option *ngFor="let lang of VM.idiomas" [value]="lang.id">{{lang.idioma}}</option>
+    </select>
+    <label for="languageVOId">v.o.:</label>
   </div>
-  <div class="form-floating">
-    <input class="form-control" type="text" name="paginas" id="paginas" [(ngModel)]="VM.Elemento.paginas"
-      #paginas="ngModel" maxlength="4" pattern="^\d{1,4}$" placeholder="paginas">
-    <label for="paginas">Páginas:</label>
-    <div class="invalid-feedback" [hidden]="paginas.valid">{{paginas.errors | errormsg}}</div>
+  <div class="form-floating col-md-2">
+    <input class="form-control" [class.is-invalid]="releaseYear.invalid" type="number" name="releaseYear"
+      id="releaseYear" [(ngModel)]="VM.Elemento.releaseYear" #releaseYear="ngModel" placeholder="releaseYear" min="1901"
+      max="2155" step="1">
+    <label for="releaseYear">año:</label>
+    <output class="invalid-feedback" [hidden]="releaseYear.valid">{{releaseYear.errors | errormsg}}</output>
   </div>
-  <div class="form-floating">
-    <input class="form-control" type="url" name="wiki" id="wiki" [(ngModel)]="VM.Elemento.wiki" #wiki="ngModel"
-      placeholder="wiki">
-    <label for="wiki">Wiki:</label>
-    <div class="invalid-feedback" [hidden]="wiki.valid">{{wiki.errors | errormsg}}</div>
+  <div class="form-floating col-md-2">
+    <input class="form-control" [class.is-invalid]="length.invalid" type="number" name="length" id="length"
+      [(ngModel)]="VM.Elemento.length" #length="ngModel" placeholder="length" min="1" step="1">
+    <label for="length">duración (min):</label>
+    <output class="invalid-feedback" [hidden]="length.valid">{{length.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-3">
+    <input class="form-control" [class.is-invalid]="rentalDuration.invalid" type="number" name="rentalDuration"
+      id="rentalDuration" [(ngModel)]="VM.Elemento.rentalDuration" #rentalDuration="ngModel"
+      placeholder="rentalDuration" required min="1" step="1">
+    <label for="rentalDuration">días de alquiler:</label>
+    <output class="invalid-feedback" [hidden]="rentalDuration.valid">{{rentalDuration.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-3">
+    <input class="form-control" [class.is-invalid]="rentalRate.invalid" type="number" name="rentalRate" id="rentalRate"
+      [(ngModel)]="VM.Elemento.rentalRate" #rentalRate="ngModel" placeholder="rentalRate" required min="0.01"
+      step="0.01">
+    <label for="rentalRate">precio alquiler:</label>
+    <output class="invalid-feedback" [hidden]="rentalRate.valid">{{rentalRate.errors | errormsg}}</output>
+  </div>
+  <div class="form-floating col-md-2">
+    <input class="form-control" [class.is-invalid]="replacementCost.invalid" type="number" name="replacementCost"
+      id="replacementCost" [(ngModel)]="VM.Elemento.replacementCost" #replacementCost="ngModel"
+      placeholder="replacementCost" required min="0.01" step="0.01">
+    <label for="replacementCost">penalización:</label>
+    <output class="invalid-feedback" [hidden]="replacementCost.valid">{{replacementCost.errors | errormsg}}</output>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group">
+        <label class="input-group-text" for="actorId">Reparto</label>
+        <select class="form-control form-select" name="actorId" id="actorId" #actorId>
+          <option *ngFor="let ele of VM.Actores" [value]="ele.actorId">{{ele.nombre | titlecase}}</option>
+        </select>
+        <button class="btn btn-outline-secondary" type="button" (click)="VM.addActor(+actorId.value)"
+          [disabled]="VM.Actores.length === 0"><svg class="bi" width="16" height="16" role="img" aria-label="añadir">
+            <use xlink:href="assets/crud-sprite.svg#plus" />
+          </svg></button>
+      </div>
+      <div class="list-group">
+        <li class="list-group-item" *ngFor="let actor of VM.Elemento.actors; let indice=index;">
+          {{VM.dameActor(actor) | titlecase}} <button type="button"
+            class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="VM.removeActor(indice)"><svg
+              class="bi" width="16" height="16" role="img" aria-label="borrar">
+              <use xlink:href="assets/crud-sprite.svg#trash-fill" />
+            </svg></button></li>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="input-group">
+        <label class="input-group-text" for="categoriaId">Categorías</label>
+        <select class="form-control form-select" name="categoriaId" id="categoriaId" #categoriaId>
+          <option *ngFor="let cat of VM.Categorias" [value]="cat.id">{{cat.categoria}}</option>
+        </select>
+        <button class="btn btn-outline-secondary" type="button" (click)="VM.addCategoria(+categoriaId.value)"
+          [disabled]="VM.Categorias.length === 0"><svg class="bi" width="16" height="16" role="img" aria-label="añadir">
+            <use xlink:href="assets/crud-sprite.svg#plus" />
+          </svg></button>
+      </div>
+      <div class="list-group">
+        <li class="list-group-item" *ngFor="let categoria of VM.Elemento.categories; let indice=index;">
+          {{VM.dameCategoria(categoria)}} <button type="button"
+            class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="VM.removeCategoria(indice)"><svg
+              class="bi" width="16" height="16" role="img" aria-label="borrar">
+              <use xlink:href="assets/crud-sprite.svg#trash-fill" />
+            </svg></button></li>
+      </div>
+    </div>
   </div>
   <app-form-buttons (send)="VM.send()" [send-disabled]="miForm.invalid" (cancel)="VM.cancel()"
     (delete)="VM.delete(VM.Elemento.filmId)" [delete-visible]="VM.Modo === 'edit'" />
