@@ -25,7 +25,7 @@
                 routerLinkActive="active"><i class="fa-solid fa-film"></i> catalogo</a>
             </li>
             <li class="nav-item">
-              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/catalogo" [queryParams]="{ search: 'categorias'}"
+              <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="{{auth.isInRoles('Empleados') ? '/categorias' : '/catalogo/categorias'}}"
                 routerLinkActive="active"><i class="fa-solid fa-list"></i> categorías</a>
             </li>
             <li class="nav-item" *ngIf="auth.isInRoles('Empleados')">
@@ -36,7 +36,7 @@
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/idiomas"
                 routerLinkActive="active"><i class="fa-solid fa-language"></i> idiomas</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="auth.isAutenticated">
               <a class="btn btn-link nav-link" data-bs-dismiss="offcanvas" routerLink="/contactos"
                 routerLinkActive="active"><i class="fa-solid fa-address-book"></i> contactos</a>
             </li>

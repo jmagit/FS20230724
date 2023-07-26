@@ -4,7 +4,7 @@
   </svg></a></h1>
   <ul *ngSwitchCase="'categorias'" class="nav nav-underline nav-fill">
     <li class="nav-item" *ngFor="let cat of VM.Categorias" >
-      <a class="nav-link" aria-current="page" routerLink="." [queryParams]="{ search: 'categorias', categoria: cat.id}" routerLinkActive="active">{{cat.categoria}}</a>
+      <a class="nav-link" aria-current="page" routerLink="." [queryParams]="{ categoria: cat.id}" routerLinkActive="active">{{cat.categoria}}</a>
     </li>
   </ul>
 </ng-container>

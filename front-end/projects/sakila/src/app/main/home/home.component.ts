@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  title = 'Hola mundo';
+  title = 'Curso';
 
   // constructor(private log: LoggerService) {
   //   log.error('Es un error')
