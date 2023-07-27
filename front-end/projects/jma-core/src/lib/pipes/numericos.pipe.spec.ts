@@ -1,4 +1,15 @@
-import { ToComaDecimalPipe } from './numericos.pipe';
+import { ToComaDecimalPipe, ExecPipe} from './numericos.pipe';
+
+describe('ExecPipe', () => {
+  it('create an instance', () => {
+    const pipe = new ExecPipe();
+    expect(pipe).toBeTruthy();
+  });
+  it('ejecuta calculo', () => {
+    const pipe = new ExecPipe();
+    expect(pipe.transform((a:number, b:number) => a + b, 2, 1)).toBe(3);
+  });
+});
 
 describe('ToComaDecimalPipe', () => {
   it('create an instance', () => {

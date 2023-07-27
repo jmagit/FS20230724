@@ -32,8 +32,9 @@ describe('CapitalizePipe', () => {
   });
   [
     { input: 'hola mundo', output: 'Hola mundo' },
-    { input: 'hola Mundo', output: 'Hola mundo' },
-    { input: 'HOLA MUNDO', output: 'Hola mundo' },
+    { input: 'hola Mundo.', output: 'Hola mundo.' },
+    { input: 'HOLA MUNDO.dos', output: 'Hola mundo. Dos' },
+    { input: 'HOLA MUNDO. Son DOS frases', output: 'Hola mundo. Son dos frases' },
   ].forEach(caso => {
     it(`OK: '${caso.input}' -> '${caso.output}'`, () =>
       expect(pipe.transform(caso.input)).toBe(caso.output));

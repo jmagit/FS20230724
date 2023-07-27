@@ -88,9 +88,9 @@ export function equalsValidator(options: Array<string>): ValidatorFn {
     new Error('Faltan opciones para comparar')
   return (control: AbstractControl): { [key: string]: any } | null => {
     const form = control as FormGroup;
-    const valor1 = form.controls[options[0]] as FormControl;
+    const valor1 = control.get(options[0]) // form.controls[options[0]] as FormControl;
     const valor2 = form.controls[options[1]] as FormControl;
-    return valor1?.value === valor2?.value ? null : { equalTo: `${options[2] ?? 'No son iguales'}` };
+    return valor1?.value === valor2?.value ? null : { equals: `${options[2] ?? 'No son iguales'}` };
   };
 }
 @Directive({
@@ -99,12 +99,12 @@ export function equalsValidator(options: Array<string>): ValidatorFn {
   providers: [{ provide: NG_VALIDATORS, useExisting: forwardRef(() => EqualsValidator), multi: true }]
 })
 export class EqualsValidator implements Validator {
-  constructor(@Attribute('equalsTo') public options: string) { }
+  constructor(@Attribute('equals') public options: string) { }
   validate(control: FormGroup): ValidationErrors | null {
     return equalsValidator(eval(this.options))(control)
   }
 }
-// <form #miForm="ngForm" equalsTo="['nombre','apellidos','El nombre y los apellidos deben ser iguales']">
+// <form #miForm="ngForm" equals="['nombre','apellidos','El nombre y los apellidos deben ser iguales']">
 
 export function equalsToValidator(cntrlBind?: AbstractControl): ValidatorFn {
   let subscribe: boolean = false;
