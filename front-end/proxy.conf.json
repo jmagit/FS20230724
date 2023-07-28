@@ -5,7 +5,7 @@
     "secure": false,
     "logLevel": "debug"
   },
-  "/api": {
+  "/old/api": {
     "target": "http://localhost:4321",
     "secure": false,
     "logLevel": "debug"

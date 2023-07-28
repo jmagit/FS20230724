@@ -35,7 +35,6 @@ spring:
           - Path=/api/contactos/**
         uri: lb://contactos-service
         filters:
-          - RewritePath=/api/contactos, /api/v1/contactos
           - RewriteLocationResponseHeader=AS_IN_REQUEST, Location, ,
       - id: serv-demos
         predicates:

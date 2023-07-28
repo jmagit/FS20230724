@@ -109,7 +109,7 @@ export class ContactosEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.obs$ = this.route.paramMap.subscribe(
       (params: ParamMap) => {
-        const id = parseInt(params?.get('id') ?? '');
+        const id = params?.get('id') ?? '';
         if (id) {
           this.vm.edit(id);
         } else {
@@ -132,7 +132,7 @@ export class ContactosViewComponent implements OnChanges {
   public get VM(): ContactosViewModelService { return this.vm; }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.id) {
-      this.vm.view(+this.id);
+      this.vm.view(this.id);
     } else {
       this.router.navigate(['/404.html']);
     }
