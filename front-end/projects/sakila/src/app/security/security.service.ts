@@ -136,7 +136,8 @@ export class AuthInterceptor implements HttpInterceptor {
     const authReq = this.addAuthorizationHeader(req)
     return next.handle(authReq).pipe(
       catchError(err => {
-        if ([401, 403].includes(err.status) && err.error?.detail?.toLowerCase()?.includes('token expired')
+        if ([401, 403].includes(err.status) &&
+          (err.error?.detail?.toLowerCase()?.includes('token expired') || err.error?.message?.toLowerCase()?.includes('token has expired'))
           && !authReq.url.includes('/refresh') && this.auth.isAutenticated) {
           return this.refreshToken(authReq, next);
         }

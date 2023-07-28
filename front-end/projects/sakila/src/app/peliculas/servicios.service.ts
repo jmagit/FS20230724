@@ -57,7 +57,7 @@ export class PeliculasViewModelService extends ViewModelService<any, number> {
   private actores: Array<any> = [];
   private categorias: Array<any> = [];
 
-  public get Actores(): any { return this.actores.filter(item => !this.elemento?.actors?.includes(item.actorId)); }
+  public get Actores(): any { return this.actores.filter(item => !this.elemento?.actors?.includes(item.id)); }
   public get Categorias(): any { return this.categorias.filter(item => !this.elemento?.categories?.includes(item.id)); }
 
   public cargaCategorias() {
@@ -95,7 +95,7 @@ export class PeliculasViewModelService extends ViewModelService<any, number> {
 
   dameActor(id: number) {
     if (!this?.actores || this.actores.length === 0) return '(sin cargar)'
-    const cat = this.actores.find(item => item.actorId === id)
+    const cat = this.actores.find(item => item.id === id)
     return cat ? cat.nombre : 'error'
   }
   addActor(id: number) {

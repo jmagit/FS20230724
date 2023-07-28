@@ -16,7 +16,7 @@
   <div class="form-floating col-md-6">
     <select class="form-control form-select" [class.is-invalid]="rating.invalid" name="rating" id="rating"
       [(ngModel)]="VM.Elemento.rating" #rating="ngModel">
-      <option [value]="null"></option>
+      <option value="{{null}}"></option>
       <option *ngFor="let ele of VM.clasificaciones" [value]="ele.key">{{ele.value}} ({{ele.key}})</option>
     </select>
     <label for="rating">clasificación por edades:</label>
@@ -75,11 +75,11 @@
   <div class="row mt-2 g-1">
     <div class="col-md-6">
       <div class="input-group">
-        <label class="input-group-text" for="actorId">Reparto</label>
-        <select class="form-control form-select" name="actorId" id="actorId" #actorId>
-          <option *ngFor="let ele of VM.Actores" [value]="ele.actorId">{{ele.nombre | titlecase}}</option>
+        <label class="input-group-text" for="id">Reparto</label>
+        <select class="form-control form-select" name="id" id="id" #id>
+          <option *ngFor="let ele of VM.Actores" [value]="ele.id">{{ele.nombre | titlecase}}</option>
         </select>
-        <button class="btn btn-outline-secondary" type="button" (click)="VM.addActor(+actorId.value)"
+        <button class="btn btn-outline-secondary" type="button" (click)="VM.addActor(+id.value)"
           [disabled]="VM.Actores.length === 0"><svg class="bi" width="16" height="16" role="img" aria-label="añadir">
             <use xlink:href="assets/crud-sprite.svg#plus" />
           </svg></button>

@@ -1,5 +1,5 @@
 {
-  "/api/catalogo": {
+  "/old/api/catalogo": {
     "target": "http://localhost:8010",
     "pathRewrite": { "^/api/catalogo": "/" },
     "secure": false,
