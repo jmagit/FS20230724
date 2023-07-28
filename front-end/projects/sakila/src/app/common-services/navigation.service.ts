@@ -21,11 +21,11 @@ export class NavigationService {
       if (e instanceof NavigationEnd && !e.url.includes('/login')) {
         this.history.push(e.url);
         if (this.history.length > this.MAX_CACHE) this.history.splice(0, 1)
-        logger.log(`${this.history.length} NavigationEnd ${e.url}`);
+        logger.trace(`${this.history.length} NavigationEnd ${e.url}`);
       }
       if (e instanceof GuardsCheckEnd) {
         const ev = e as GuardsCheckEnd
-        logger.log(`GuardsCheckEnd to ${e.url}: ${ev.shouldActivate}`);
+        logger.trace(`GuardsCheckEnd to ${e.url}: ${ev.shouldActivate}`);
       }
     });
   }
@@ -37,6 +37,6 @@ export class NavigationService {
     }
     const url = this.history.pop() ?? defecto;
     this.router.navigateByUrl(url);
-    this.logger.log(`Back to ${url}`);
+    this.logger.trace(`Back to ${url}`);
   }
 }

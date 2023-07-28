@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Optional, isDevMode } from '@angular/core';
 
 export const ERROR_LEVEL = new InjectionToken<string>('ERROR_LEVEL')
 
@@ -35,6 +35,15 @@ export class LoggerService {
   }
   public log(msg: string): void {
     if (this.nivel > 3) {
+      console.log(msg)
+    }
+  }
+  /**
+   * Mensajes en modo desarrollo
+   * @param msg
+   */
+  public trace(msg: string): void {
+    if (isDevMode() && this.nivel > 4) {
       console.log(msg)
     }
   }
