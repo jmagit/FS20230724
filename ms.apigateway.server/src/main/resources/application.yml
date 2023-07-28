@@ -36,14 +36,17 @@ spring:
         uri: lb://contactos-service
         filters:
           - RewritePath=/api/contactos, /api/v1/contactos
+          - RewriteLocationResponseHeader=AS_IN_REQUEST, Location, ,
       - id: serv-demos
         predicates:
           - Path=/demos/**
         uri: lb://demo-service
         filters:
           - RewritePath=/demos, /
+          - RewriteLocationResponseHeader=AS_IN_REQUEST, Location, ,
       - id: serv-autentication
         predicates:
+          - Method=POST
           - Path=/login/**
         uri: lb://autentication-service
       - id: serv-autentication-user
