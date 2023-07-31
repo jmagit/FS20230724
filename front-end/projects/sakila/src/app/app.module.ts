@@ -14,6 +14,7 @@ import { AjaxWaitInterceptor, MainModule } from './main';
 import { AuthInterceptor, SecurityModule } from './security';
 import { PeliculasModule } from './peliculas';
 import { environment } from '../environments/environment';
+import { NovedadesComponent } from './novedades/novedades.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
     AppRoutingModule, MainModule, SecurityModule,
-    PeliculasModule,
+    PeliculasModule, NovedadesComponent,
     TypeValidator, NotblankValidator,
   ],
   providers: [

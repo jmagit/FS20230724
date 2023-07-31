@@ -1,0 +1,28 @@
+<h1 class="display-1">Novedades</h1>
+<form #miForm="ngForm">
+  <div class="input-group mb-3" [class.is-invalid]="txtFecha.invalid">
+    <span class="input-group-text">Desde:</span>
+    <input type="date" class="form-control" name="fecha" [(ngModel)]="fecha" #txtFecha="ngModel" required pastOrPresent >
+    <button class="btn btn-outline-secondary" type="button" (click)="cargar()" [disabled]="miForm.invalid">buscar</button>
+  </div>
+    <output class="invalid-feedback" [hidden]="txtFecha.valid">{{txtFecha.errors | errormsg}}</output>
+</form>
+<ng-container *ngIf="novedades?.films?.length > 0">
+  <h2 class="display-4">Peliculas</h2>
+  <app-peliculas-list-body [Listado]="novedades?.films" urlBase="/catalogo/" (imageError)="imageErrorHandler($event)" />
+</ng-container>
+<ng-container *ngIf="novedades?.actors?.length > 0">
+  <h2 class="display-4">Actores</h2>
+  <div><span class="badge text-bg-info me-1"
+    *ngFor="let item of novedades?.actors">{{item.nombre}} {{item.apellidos}}</span></div>
+</ng-container>
+<ng-container *ngIf="novedades?.categories?.length > 0">
+  <h2 class="display-4">Categorias</h2>
+  <div><span class="badge text-bg-info me-1"
+    *ngFor="let item of novedades?.categories">{{item.categoria}}</span></div>
+</ng-container>
+<ng-container *ngIf="novedades?.languages?.length > 0">
+  <h2 class="display-4">Idioma</h2>
+  <div><span class="badge text-bg-info me-1"
+    *ngFor="let item of novedades?.languages">{{item.idioma}}</span></div>
+</ng-container>

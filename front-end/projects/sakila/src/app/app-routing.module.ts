@@ -4,10 +4,11 @@ import { HomeComponent, PageNotFoundComponent } from './main';
 import { PeliculasListComponent, routes as PeliculasRoutes } from './peliculas';
 import { AuthCanActivateFn, AuthWithRedirectCanActivate, InRoleCanActivate, LoginFormComponent, RegisterUserComponent } from './security';
 import { environment } from '../environments/environment';
+import { NovedadesComponent } from './novedades/novedades.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'inicio', component: HomeComponent },
+  { path: '', pathMatch: 'full', component: NovedadesComponent },
+  { path: 'inicio', component: NovedadesComponent },
   { path: 'catalogo/categorias', component: PeliculasListComponent, data: { search: 'categorias' }, title: 'categorias' },
   { path: 'catalogo/categorias/:idPeli/:tit', redirectTo: '/catalogo/:idPeli/:tit', title: 'catalogo' },
   { path: 'catalogo', children: PeliculasRoutes, title: 'catalogo' },

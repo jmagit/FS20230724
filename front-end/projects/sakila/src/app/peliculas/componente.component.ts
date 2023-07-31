@@ -69,7 +69,9 @@ export class PeliculasListComponent implements OnChanges, OnDestroy {
 })
 export class PeliculasListBodyComponent {
   @Input({required: true}) Listado: Array<any> = []
+  @Input() urlBase = ''
   @Output() imageError = new EventEmitter<any>()
+
   imageErrorHandler(event: Event) {
     this.imageError.emit(event)
   }
