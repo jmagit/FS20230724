@@ -31,6 +31,7 @@ import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
+import io.micrometer.observation.annotation.Observed;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -45,6 +46,7 @@ public class ActorResource {
 	private ActorService srv;
 
 	@GetMapping
+	@Observed(name = "actores", contextualName = "all")
 	public List<ActorShort> getAll(@RequestParam(required = false) String sort) {
 		if(sort != null)
 			return (List<ActorShort>)srv.getByProjection(Sort.by(sort), ActorShort.class);
@@ -57,6 +59,7 @@ public class ActorResource {
 	}
 
 	@GetMapping(path = "/{id}")
+	@Observed(name = "cotilla", contextualName = "byId")
 	public ActorDTO getOne(@PathVariable int id) throws NotFoundException {
 		var item = srv.getOne(id);
 		if(item.isEmpty())

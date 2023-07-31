@@ -81,7 +81,7 @@ public class ContactoResource {
 
 	@GetMapping(path = "/{id}")
 	@Operation(summary = "Consultar un contacto")
-//	@Secured({ "ROLE_ADMIN" })
+//	@Secured({ "ROLE_ADMINISTRADORES" })
 	@SecurityRequirement(name = "bearerAuth")
 	public Contacto getOne(@PathVariable String id) throws Exception {
 		Optional<Contacto> rslt = dao.findById(id);
@@ -118,7 +118,7 @@ public class ContactoResource {
 		return dao.save(item); // ConstraintViolationException
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMINISTRADORES')")
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@Operation(summary = "Eliminación de un contacto")

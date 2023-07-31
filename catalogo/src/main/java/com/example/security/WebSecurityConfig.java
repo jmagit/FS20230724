@@ -40,7 +40,7 @@ public class WebSecurityConfig {
                 .addFilterAfter(new JWTAuthorizationFilter(SECRET), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests -> requests
                     .requestMatchers("/error").permitAll()
-//                    .requestMatchers("/actores/v1/**").hasRole("ADMIN")
+//                    .requestMatchers("/actores/v1/**").hasRole("ADMINISTRADORES")
                     .anyRequest().permitAll()
                  )
                 .build();

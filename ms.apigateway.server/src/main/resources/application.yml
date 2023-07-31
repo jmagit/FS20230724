@@ -8,9 +8,16 @@ eureka:
       defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
   instance:
     appname: apigateway-server
+management:
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKINSRV_URL:http://localhost:9411}/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
 spring:
   application:
-    name: apigateway-server
+    name: ${NOMBRE:apigateway-server}
   cloud:
     gateway:
       default-filters:
@@ -70,4 +77,6 @@ spring:
         uri: ${FRONTEND_URL:http://localhost:4200}
 logging:
   level:
-    org.springframework.cloud.gateway: DEBUG
+    '[org.springframework.cloud.gateway]': DEBUG
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
