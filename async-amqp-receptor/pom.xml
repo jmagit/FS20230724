@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>amqp-receptor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>amqp-receptor</name>
+	<name>async-amqp-receptor</name>
 	<description>Ejemplo de receptor AMQP con RabbitMQ</description>
 	<properties>
 		<java.version>17</java.version>
