@@ -16,6 +16,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.application.proxies.ActoresProxy;
@@ -36,6 +38,7 @@ import com.example.domains.entities.dtos.PhotoDTO;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.micrometer.observation.annotation.Observed;
@@ -150,7 +153,7 @@ public class CotillaResource {
 				LocalTime ini = LocalTime.now();
 				rslt.add(cbFactory.create("slow").run(
 						() -> srvLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class), 
-						throwable -> "fallback")
+						throwable -> "fallback: circuito abierto")
 						+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " .ms)" );
 			}
 		LocalDateTime fin = LocalDateTime.now();
@@ -159,6 +162,7 @@ public class CotillaResource {
 	}
 	
 	@GetMapping(path = "/circuit-breaker/anota")
+	@CircuitBreaker(name = "default", fallbackMethod = "fallback")
 	public List<String> getCircuitBreakerAnota() {
 		List<String> rslt = new ArrayList<>();
 		LocalDateTime inicio = LocalDateTime.now();
@@ -172,11 +176,17 @@ public class CotillaResource {
 	
 	@CircuitBreaker(name = "default", fallbackMethod = "fallback")
 	private String getInfo(LocalTime ini) {
-		return srv.getForObject("http://localhost:8010/actuator/info", String.class)
-						+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)";
+		return srvLB.getForObject("lb://CATALOGO-SERVICE/loteria", String.class)
+		+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)";
+//		return srv.getForObject("http://localhost:8010/actuator/info", String.class)
+//						+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)";
 //		return srvLB.getForObject("lb://CATALOGO-SERVICE/actuator/info", String.class)
 //				+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)";
 	}
+	private List<String> fallback(CallNotPermittedException e) {
+		return List.of("CircuitBreaker is open", e.getCausingCircuitBreakerName(), e.getLocalizedMessage());
+	}
+	
 	private String fallback(LocalTime ini, CallNotPermittedException e) {
 		return "CircuitBreaker is open";
 	}
@@ -185,11 +195,21 @@ public class CotillaResource {
 		return "Fallback: " + e.getMessage()
 						+ " (" + ini.until(LocalTime.now(), ChronoUnit.MILLIS) + " ms)";
 	}
+
+//	@org.springframework.beans.factory.annotation.Value("${server.port}")
+//	int port;
+//	
+//	@GetMapping(path = "/loteria", produces = {"text/plain"})
+//	public String getIntento() {
+//		if(port == 8011)
+//			throw new HttpServerErrorException(HttpStatusCode.valueOf(500));
+//		return "OK " + port;
+//	}
 	
-	@Value("${particular.para.demos}")
+	@Value("${valor.ejemplo:Valor por defecto}")
 	String config;
 	
-	@GetMapping(path = "/config")
+	@GetMapping(path = "/config", produces = {"text/plain"})
 	public String getConfig() {
 		return config;
 	}
