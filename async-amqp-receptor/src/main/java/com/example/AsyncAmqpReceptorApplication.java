@@ -34,11 +34,11 @@ import io.swagger.v3.oas.annotations.info.License;
         externalDocs = @ExternalDocumentation(description = "Documentación del proyecto", url = "https://github.com/jmagit/REM20220725")
 )
 @SpringBootApplication
-public class AmqpReceptorApplication {
-	private static final Logger LOGGER = Logger.getLogger(AmqpReceptorApplication.class.getName());
+public class AsyncAmqpReceptorApplication {
+	private static final Logger LOGGER = Logger.getLogger(AsyncAmqpReceptorApplication.class.getName());
 
 	public static void main(String[] args) {
-		SpringApplication.run(AmqpReceptorApplication.class, args);
+		SpringApplication.run(AsyncAmqpReceptorApplication.class, args);
 	}
 
     @Bean
