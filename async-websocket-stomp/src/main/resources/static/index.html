@@ -12,8 +12,8 @@
 }
 
 html, body {
-	height: 100%;
-	width: 100%;
+	height: 100vh;
+	width: 100vw;
 	margin: 0;
 }
 
@@ -26,7 +26,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	justify-items: stretch;
+	justify-content: stretch;
 }
 
 form {
@@ -35,7 +35,6 @@ form {
 	height: 3rem;
 	/* backdrop-filter: blur(10px); */
 }
-
 input {
 	border: none;
 	padding: 0 1rem;
@@ -63,21 +62,32 @@ form>button {
 }
 
 div {
+	flex: 1;
+	align-self: stretch;
+	align-content: stretch;
+	display: flex;
+	justify-content: space-around;
+	align-items: stretch;
+}
+
+#messages, #trace {
+	flex: 1;
+	overflow: auto;
 	margin: 2px 10px 0px 10px;
 	padding: 5px; 
 	border-radius: 1rem;
 	box-sizing: border-box;
-	flex: 100%;
-	min-height: 90vh;
-	overflow: auto;
+	list-style-type: none;
+	min-height: 100%;
+	max-height: 90vh;
 	background-color: #fff;
 }
-
 #messages {
-	list-style-type: none;
+	flex: 2;
+	margin-right: 0;
 }
 
-#messages>li {
+#messages>li, #trace > li {
 	padding: 0.5rem 1rem;
 }
 
@@ -95,6 +105,7 @@ div {
 	</form>
 	<div>
 		<ul id="messages"></ul>
+		<ul id="trace"></ul>
 	</div>
 	<form id="publish" action="">
 		<input autocomplete="off" value="Hola" title="mensaje" />
@@ -108,6 +119,7 @@ div {
     let stompClient
     let container = document.querySelector('div');
     let messages = document.querySelector('#messages');
+    let traza = document.querySelector('#trace');
     let input = document.querySelector('#publish input');
 	let username = ''
 	let unsubscribe
@@ -117,7 +129,14 @@ div {
       item.textContent = msg;
       messages.appendChild(item);
       item.focus()
-      container.scrollTo(0, container.scrollHeight);
+      messages.scrollTo(0, messages.scrollHeight);
+    }
+    const trace = msg => {
+      var item = document.createElement('li');
+      item.textContent = msg;
+      traza.appendChild(item);
+      item.focus()
+      traza.scrollTo(0, traza.scrollHeight);
     }
     const toggle = () => {
       document.forms.publish.className = document.forms.publish.className === '' ? 'oculto' : ''
@@ -131,19 +150,19 @@ div {
 		username = input.value
         stompClient = Stomp.client(`ws://${location.host}/chat`);
 		unsubscribe = stompClient.connect({}, frame => {
-            show(`[open] Conexión establecida: ${JSON.stringify(frame)}`)
+            trace(`[open] Conexión establecida: ${JSON.stringify(frame)}`)
             stompClient.subscribe('/topic/messages', function (response) {
             	let messaje = JSON.parse(response.body)
                 show(`${messaje.name}: ${messaje.text}`)
             });
             toggle()
-		}, error => show(`[error]: ${JSON.stringify(error)}`));
+		}, error => traza(`[error]: ${JSON.stringify(error)}`));
       }
     });
     document.forms.publish.addEventListener('submit', function (e) {
       e.preventDefault();
       if (input.value) {
-        show(`[send] ${input.value}`);
+        trace(`[send] ${input.value}`);
 		stompClient.send("/example/chat", {}, JSON.stringify({'name': username, text: input.value}));
         // input.value = '';
       }
