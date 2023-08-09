@@ -1,9 +1,9 @@
-<%@ include file="parts/header.jsp" %>
+<%@ include file="parts/header.jsp"%>
 <ul class="pagination"></ul>
 
 <ul id="rslt"></ul>
 
-<%@ include file="parts/footerScripts.jsp" %>
+<%@ include file="parts/footerScripts.jsp"%>
 <script type="text/javascript">
 function pide(pag) {
 	$('#rslt').empty();
@@ -27,4 +27,4 @@ function pide(pag) {
 let paginas = -1;
 pide(0);
 </script>
-<%@ include file="parts/footerEnd.jsp" %>
+<%@ include file="parts/footerEnd.jsp"%>

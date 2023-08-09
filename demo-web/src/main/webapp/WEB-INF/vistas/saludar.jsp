@@ -7,7 +7,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Curso</title>
-<link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>

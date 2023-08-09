@@ -40,14 +40,16 @@
 			</ul>
 			<div class="btn-group btn-group-sm float-right">
 				<sec:authorize access="isAnonymous()">
-					<a class="nav-link" href="${pageContext.request.contextPath}/mylogin">Log In</a>
+					<a class="nav-link"
+						href="${pageContext.request.contextPath}/mylogin">Log In</a>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication property="principal.username" />
-					<a class="nav-link" href="${pageContext.request.contextPath}/logout">Log Out</a>
+					<a class="nav-link"
+						href="${pageContext.request.contextPath}/logout">Log Out</a>
 				</sec:authorize>
-				<a href="?lang=es" class="btn btn-primary btn-sm">ES</a>
-				<a href="?lang=en" class="btn btn-primary btn-sm">EN</a>
+				<a href="?lang=es" class="btn btn-primary btn-sm">ES</a> <a
+					href="?lang=en" class="btn btn-primary btn-sm">EN</a>
 			</div>
 		</div>
 	</nav>

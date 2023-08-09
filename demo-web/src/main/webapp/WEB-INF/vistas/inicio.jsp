@@ -1,3 +1,3 @@
-<%@ include file="parts/header.jsp" %>
+<%@ include file="parts/header.jsp"%>
 <h1>Hola mundo</h1>
-<%@ include file="parts/footer.jsp" %>
+<%@ include file="parts/footer.jsp"%>
