@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-//@Controller
-public class AppErrorController /*implements ErrorController*/ {
+@Controller
+public class AppErrorController implements ErrorController {
     private final static String ERROR_PATH = "/error";
     @Autowired
     private ErrorAttributes errorAttributes; // Error Attributes in Application
