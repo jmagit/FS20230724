@@ -31,14 +31,14 @@ public class AppSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder)
-			throws Exception {
-		return http.getSharedObject(AuthenticationManagerBuilder.class)
-				.userDetailsService(new UserDetailsServiceImpl())
-				.passwordEncoder(bCryptPasswordEncoder)
-				.and().build();
-	}
+//	@Bean
+//	public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder)
+//			throws Exception {
+//		return http.getSharedObject(AuthenticationManagerBuilder.class)
+//				.userDetailsService(new UserDetailsServiceImpl())
+//				.passwordEncoder(bCryptPasswordEncoder)
+//				.and().build();
+//	}
 
 	@Bean
 	public HttpFirewall getHttpFirewall() {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, numberAttribute } from '@angular/core';
 
 @Component({
   selector: 'jma-sizer',
@@ -12,7 +12,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   `
 })
 export class SizerComponent {
-  @Input()  size: number | string = 12;
+  @Input({transform: numberAttribute})  size: number = 12;
   @Output() sizeChange = new EventEmitter<number>();
 
   dec() : void { this.resize(-1); }
