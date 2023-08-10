@@ -8,6 +8,11 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.Length;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.AbstractStandardBasicType;
+import org.hibernate.type.SqlTypes;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -27,6 +32,7 @@ public class Film implements Serializable {
 	private int filmId;
 
 	@Lob
+	@Column(columnDefinition = "clob")
 	private String description;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
