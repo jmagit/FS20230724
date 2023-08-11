@@ -33,9 +33,6 @@ public class Address implements Serializable {
 	@Column(name="last_update", nullable=false)
 	private Timestamp lastUpdate;
 
-	@Column(nullable=false)
-	private Object location;
-
 	@Column(nullable=false, length=20)
 	private String phone;
 
@@ -100,14 +97,6 @@ public class Address implements Serializable {
 
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
-	}
-
-	public Object getLocation() {
-		return this.location;
-	}
-
-	public void setLocation(Object location) {
-		this.location = location;
 	}
 
 	public String getPhone() {

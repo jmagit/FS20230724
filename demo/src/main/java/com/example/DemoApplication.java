@@ -91,17 +91,17 @@ public class DemoApplication implements CommandLineRunner {
 //	ObservedAspect observedAspect(ObservationRegistry observationRegistry) {
 //		return new ObservedAspect(observationRegistry); 
 //	}
-	@Bean
-	public Capability capability(final MeterRegistry registry) {
-		return new MicrometerCapability(registry);
-	}
+//	@Bean
+//	public Capability capability(final MeterRegistry registry) {
+//		return new MicrometerCapability(registry);
+//	}
 
 //	@Autowired
 //	ActorRepository dao;
-	@Autowired
-	ActorService srv;
-	@Autowired
-	LanguageRepository dao;
+//	@Autowired
+//	ActorService srv;
+//	@Autowired
+//	LanguageRepository dao;
 
 	@Override
 //	@Transactional
