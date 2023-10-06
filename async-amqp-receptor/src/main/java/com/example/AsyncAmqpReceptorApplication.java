@@ -3,6 +3,7 @@ package com.example;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -53,6 +54,8 @@ public class AsyncAmqpReceptorApplication {
 
 	@RabbitListener(queues = "demo.saludos")
 	public void listen(MessageDTO in) {
+		if(in.getMsg() == null)
+			throw new AmqpException("Mensaje invalido");
 		Store.add(new Message(in));
 		LOGGER.warning("MENSAJE RECIBIDO: " + in);
 	}

@@ -36,6 +36,16 @@ public class EmisorResource {
 		return "SEND: " + msg;
 	}
 
+	@GetMapping(path = "/multienvio/{cantidad}")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public String multienvio(@PathVariable int cantidad) {
+		for(int i=0; i < cantidad; i++) {
+			amqp.convertAndSend("demo.saludos", new MessageDTO("Envio nº: " + i, origen));
+		}
+		return "Enviados: " + cantidad;
+	}
+
+
 	@GetMapping(path = "/x-rpc/respuestas")
 	public List<MessageDTO> respuestas() {
 		return respuestas;

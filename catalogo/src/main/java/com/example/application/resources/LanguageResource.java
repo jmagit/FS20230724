@@ -101,7 +101,6 @@ public class LanguageResource {
 
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	@JsonView(Language.Partial.class)
 	public void delete(@PathVariable int id) throws Exception {
 		try {
 			dao.deleteById(id);
